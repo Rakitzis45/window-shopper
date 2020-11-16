@@ -1,0 +1,26 @@
+<h1>New item<h1>
+<form action='/items/new' method='POST'>
+    <label>Name:</label>
+    <input type='text' name=item[name] value=''>
+    <br/>
+    <label>Price: </label>
+    <input type='float' name=item[price] value=''>
+    <br/>
+    <label>URL: </label>
+    <input type='text' name=item[item_url] value=''>
+    <br/>
+
+
+    <label>Choose List: </label>
+    
+    <select name='item[list_id]'>
+        <%@lists.each do |list| %>
+        <option value=<%=list.id%>> <%=list.name%></option> 
+        <% end %>
+    </select>
+  
+
+
+    
+    <input type='submit' value='Create New Item'>
+</form>
