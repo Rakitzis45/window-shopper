@@ -1,0 +1,7 @@
+<h1>Hello <%= @user.username%> </h1>
+    <% @user.lists.each do |list|%>
+    
+<ol>
+    <a href="/lists/<%=list.id%>"><%=list.name%> </a>
+</ol>
+    <%end%>
