@@ -23,23 +23,36 @@ class UsersController < ApplicationController
             erb :'users/homepage'
         else
             erb :'sessions/error'
-        end
-        
-        
-        
+        end 
+    end
+
+    get '/user/:id/edit' do #edit
+        @user = User.find_by(id:session[:user_id])
+        erb :'users/edit'
     end
 
     post '/signup' do #create 
         @user = User.new(params[:user])
         already_taken?
-        redirct to '/login'
-        
+        redirct to '/login'  
     end
 
-    get '/user/:id/edit' do #edit
-    end
 
     patch '/user/:id' do #update
+        @user = User.find_by(id:session[:user_id])
+        if params[:user][:password] == "" && params[:user][:username] != ""
+            update_username
+        elsif params[:user][:username] != "" && params[:user][:password] != ""
+           @user.update(params[:user]) 
+           redirect to "/user/#{session[:user_id]}"
+        else
+            redirect to "/user/#{session[:user_id]}/edit"
+        end
     end
+
+    delete '/user/:id/delete' do
+    
+    end
+
 
 end
