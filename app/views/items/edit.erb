@@ -2,7 +2,7 @@
 <form action='/items/<%=@item.id%>'method='POST'>
     <input type='hidden' name='_method' value="PATCH">
     <label>Item name:</label>
-    <input type='text' name=item[name] value=<%=@item.name%>>
+    <input type='text' name=item[name] value=<%= @item.name %>>
     <%# not displaying full name in value %>
     <br/>
     <label>Item price: </label>
@@ -21,8 +21,10 @@
     <br/>
     <input type='submit' value="Edit Item">
 </form>
-<form action='/items/:id' method="POST">
+<form action='/items/<%=@item.id%>' method="POST">
         <input type='hidden' name='_method' value="DELETE">
         <input type='submit' value='Delete Item'>
 </form>
+
+<a href='/lists/<%=@item.list_id%>'>Return to List</a>
     
