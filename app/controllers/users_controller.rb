@@ -51,7 +51,10 @@ class UsersController < ApplicationController
     end
 
     delete '/user/:id/delete' do
-    
+        @user = User.find_by(id:session[:user_id])
+        @user.destroy
+        session.clear
+        redirect to '/login'
     end
 
 
