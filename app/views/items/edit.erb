@@ -1,0 +1,28 @@
+<h1><%=@item.name%><h1>
+<form action='/items/<%=@item.id%>'method='POST'>
+    <input type='hidden' name='_method' value="PATCH">
+    <label>Item name:</label>
+    <input type='text' name=item[name] value=<%=@item.name%>>
+    <%# not displaying full name in value %>
+    <br/>
+    <label>Item price: </label>
+    <input type='float' name=item[price] value=<%=@item.price%>>
+    <br>
+    <label> Item Url: </label>
+    <input type='text' name=item[item_url] value=<%=@item.item_url%>>
+    <br/>
+
+    <label>Item List:</label>
+    <select name='item[list_id]'>
+        <%@lists.each do |list| %>
+        <option value=<%=list.id%>> <%=list.name%></option> 
+        <% end %>
+    </select>
+    <br/>
+    <input type='submit' value="Edit Item">
+</form>
+<form action='/items/:id' method="POST">
+        <input type='hidden' name='_method' value="DELETE">
+        <input type='submit' value='Delete Item'>
+</form>
+    
