@@ -1,0 +1,14 @@
+<h1><%=@list.name%></h2>
+<form action='/lists/<%=@list.id%>' method='POST'>
+    <input type='hidden' name='_method' value='PATCH'>
+    <label>List Name:</label>
+    <input type='string' name=list[name] Value="<%=@list.name%>">
+    <br/>
+    <br/>
+    <input type='submit' value='Edit Name'>
+</form>
+<br/>
+<form action='/lists/<%=@list.id%>' method='POST'>
+    <input type='hidden' name='_method' value='DELETE'>
+    <input type='submit' value="Delete List">
+</form>
