@@ -1,0 +1,21 @@
+<h1>Edit Login</h1>
+
+<form action='/user/<%=@user.id%>' method='POST'>
+    <input type='hidden' name='_method' value="PATCH">
+    <label>Username:</label>
+    <input type='string' name=user[username] value='<%=@user.username%>'>
+    <br/>
+    <br/>
+    <label>Password:</label>
+    <input type ='password' name=user[password]>
+    <br/>
+    <br/>
+    <input type='submit' value='Update Profile'>
+</form>
+<br/>
+<form action='/user/<%=@user.id%>/delete' method='POST'>
+    <input type='hidden' name='_method' value="DELETE">
+    <input type='submit' value='Delete Account'>
+</form>
+<br/>
+<a href='/user/<%=@user.id%>'> Return to Profile </a>
