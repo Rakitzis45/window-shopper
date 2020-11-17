@@ -10,10 +10,18 @@ class ListsController < ApplicationController
     end
 
     get '/lists/:id' do
-        binding.pry
         @user = User.find_by(id:session[:user_id])
+
+        if @user.lists.find_by_id(params[:id].to_i) == nil
+            erb :'sessions/error'
+        else
+        #find a way to check to see if list_id is in @user.lists
+        #if it is continue
+        #else redirect to error page
         @list = List.find_by(id:params[:id])
         erb :'lists/show'
+        end
+
     end
 
 
