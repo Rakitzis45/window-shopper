@@ -1,7 +1,12 @@
 <h1>Hello <%= @user.username%> </h1>
-    <% @user.lists.each do |list|%>
-    
+     
 <ol>
-    <a href="/lists/<%=list.id%>"><%=list.name%> </a>
-</ol>
+    <% @user.lists.each do |list|%> 
+   <li> <a href="/lists/<%=list.id%>"><%=list.name%> </a> </li>
     <%end%>
+</ol>
+    <br/>
+    
+    <a href='/user/<%=session[:user_id]%>/edit'> Edit Login </a>
+    <br/>
+    <a href='/logout'>Logout </a>
