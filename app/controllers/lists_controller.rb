@@ -18,8 +18,25 @@ class ListsController < ApplicationController
         @list = List.find_by(id:params[:id])
         erb :'lists/show'
         end
-
     end
+
+    get '/lists/:id/edit' do #edit
+        @list = List.find_by(id:params[:id])
+        erb :'/lists/edit'
+    end
+
+    patch '/lists/:id' do #update
+        @list = List.find_by(id:params[:id])
+        @list.update(params[:list])
+        redirect to "/lists/#{@list.id}"
+    end
+
+    delete '/lists/:id' do #delete
+        @list = List.find_by(id:params[:id])
+        @list.destroy
+        redirect to "/user/#{session[:user_id]}"
+    end
+
 
 
 
