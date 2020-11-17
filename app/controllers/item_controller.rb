@@ -37,6 +37,10 @@ class ItemsController < ApplicationController
     end
 
     delete '/items/:id' do 
+        item = Item.find_by(id:params[:id])
+        list = item.list_id
+        item.destroy
+        redirect to "/lists/#{list}"
     end
         
 end
