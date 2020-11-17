@@ -24,5 +24,15 @@ class ApplicationController < Sinatra::Base
         redirect to '/signup'
       end
     end
+
+    def update_username
+      if User.find_by(username: params[:user][:username]) == nil
+        @user.username = params[:user][:username]
+        @user.save
+        redirect to "/user/#{session[:user_id]}"
+      else
+        redirect to "/user/#{session[:user_id]}/edit"
+      end
+    end
   end
 end
