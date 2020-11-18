@@ -8,13 +8,27 @@ class ApplicationController < Sinatra::Base
     set :public_folder, 'public'
     set :views, 'app/views'
   end
+
+  before do 
+    
+    pass if request.path_info == "/login" || request.path_info == "/signup" || request.path_info =="/error"
+    current_user
+    if logged_in? == false
+      redirect to '/error'
+    end
+  end
+
   get "/" do
     erb :welcome
   end
 
+  get "/error" do 
+    erb :'sessions/error'
+  end
+
   helpers do
     def logged_in?
-      !!session[:user_id]
+       !!session[:user_id]
     end
 
     def already_taken?
@@ -24,6 +38,24 @@ class ApplicationController < Sinatra::Base
         redirect to '/signup'
       end
     end
+
+    def current_user
+      @user = User.find_by(id:session[:user_id])
+    end
+
+    def your_list?
+      !!@user.lists.find_by_id(params[:id].to_i)
+    end
+
+    def your_item?
+      !!@user.items.find_by_id(params[:id].to_i)
+    end
+
+    def current_list
+      @list = List.find_by(id:params[:id])
+    end
+
+    
 
     def update_username
       if User.find_by(username: params[:user][:username]) == nil
