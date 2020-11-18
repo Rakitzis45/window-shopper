@@ -7,7 +7,9 @@ class UsersController < ApplicationController
     get '/signup' do #new
         
         if logged_in?
-            redirect to '/user/:id'
+            current_user
+            redirect to "/user/#{@user.id}"
+            
         else
             erb :'sessions/signup'
         end
@@ -34,7 +36,9 @@ class UsersController < ApplicationController
     post '/signup' do #create 
         @user = User.new(params[:user])
         already_taken?
-        redirct to '/login'  
+        session[:user_id] = @user.id.to_s
+        redirect to "/user/#{@user.id}"
+
     end
 
 
