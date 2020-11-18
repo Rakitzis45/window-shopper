@@ -10,28 +10,31 @@ class ListsController < ApplicationController
     end
 
     get '/lists/:id' do #show
-        @user = User.find_by(id:session[:user_id])
-        
-        if @user.lists.find_by_id(params[:id].to_i) == nil
-            erb :'sessions/error'
-        else
-        @list = List.find_by(id:params[:id])
-        erb :'lists/show'
+        current_list
+        if your_list? == false
+            redirect to "/error"
         end
+        erb :'lists/show'       
     end
 
     get '/lists/:id/edit' do #edit
-        @list = List.find_by(id:params[:id])
-        erb :'/lists/edit'
+        if your_list? == false
+            erb :'sessions/error'
+        else
+            @list = List.find_by(id:params[:id])
+            erb :'lists/edit'    
+        end
     end
 
     patch '/lists/:id' do #update
+        binding.pry
         @list = List.find_by(id:params[:id])
         @list.update(params[:list])
         redirect to "/lists/#{@list.id}"
     end
 
-    delete '/lists/:id' do #delete
+    delete '/lists/:id/' do #delete
+
         @list = List.find_by(id:params[:id])
         @list.destroy
         redirect to "/user/#{session[:user_id]}"
