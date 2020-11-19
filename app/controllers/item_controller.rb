@@ -37,17 +37,27 @@ class ItemsController < ApplicationController
     end
 
     patch '/items/:id' do #update
-        binding.pry
-        @item = Item.find_by(id:params[:id].to_i)
-        @item.update(params[:item])
-        redirect to "/items/#{@item.id}"
+        current_item
+        if your_item? == false
+            erb :'sessions/error'
+        elsif @user.lists.find_by(id:params[:item][:list_id].to_i) == nil
+            redirect to '/error'
+        else 
+            @item.update(params[:item])
+            redirect to "/items/#{@item.id}"
+        end
     end
 
-    delete '/items/:id' do 
-        item = Item.find_by(id:params[:id])
-        list = item.list_id
-        item.destroy
-        redirect to "/lists/#{list}"
+    delete '/items/:id' do #delete
+        binding.pry
+        if your_item? == false 
+            erb :'sessions/error'
+        else
+            current_item
+            list = @item.list_id
+            @item.destroy
+            redirect to "/lists/#{list}"
+        end
     end
         
 end

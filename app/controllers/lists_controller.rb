@@ -5,8 +5,9 @@ class ListsController < ApplicationController
     end
 
     post '/lists/new' do #create
-        List.create(name:params[:list][:name], user_id: session[:user_id].to_i)
-        redirect to "/user/#{session[:user_id]}"
+        binding.pry
+        List.create(name:params[:list][:name], user_id: @user.id)
+        redirect to "/user/#{@user.id}"
     end
 
     get '/lists/:id' do #show
@@ -18,6 +19,7 @@ class ListsController < ApplicationController
     end
 
     get '/lists/:id/edit' do #edit
+        current_list
         if your_list? == false
             erb :'sessions/error'
         else
@@ -27,17 +29,23 @@ class ListsController < ApplicationController
     end
 
     patch '/lists/:id' do #update
-        binding.pry
-        @list = List.find_by(id:params[:id])
-        @list.update(params[:list])
-        redirect to "/lists/#{@list.id}"
+        if your_list? == false
+            erb :'sessions/error'
+        else
+            current_list
+            @list.update(params[:list])
+            redirect to "/lists/#{@list.id}"
+        end
     end
 
-    delete '/lists/:id/' do #delete
-
-        @list = List.find_by(id:params[:id])
-        @list.destroy
-        redirect to "/user/#{session[:user_id]}"
+    delete '/lists/:id' do #delete
+        if your_list? == false
+            erb :'sessions/error'
+        else
+            current_list
+            @list.destroy
+            redirect to "/user/#{session[:user_id]}"
+        end
     end
 
 
