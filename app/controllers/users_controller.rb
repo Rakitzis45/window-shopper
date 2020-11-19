@@ -8,8 +8,7 @@ class UsersController < ApplicationController
         
         if logged_in?
             current_user
-            redirect to "/user/#{@user.id}"
-            
+            redirect to "/user/#{@user.id}" 
         else
             erb :'sessions/signup'
         end
@@ -33,12 +32,11 @@ class UsersController < ApplicationController
         erb :'users/edit'
     end
 
-    post '/signup' do #create 
+    post '/signup' do #create
         @user = User.new(params[:user])
         already_taken?
         session[:user_id] = @user.id.to_s
         redirect to "/user/#{@user.id}"
-
     end
 
 
