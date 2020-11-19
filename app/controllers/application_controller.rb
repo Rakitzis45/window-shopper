@@ -11,7 +11,7 @@ class ApplicationController < Sinatra::Base
 
   before do 
     
-    pass if request.path_info == "/login" || request.path_info == "/signup" || request.path_info =="/error"
+    pass if request.path_info == "/login" || request.path_info == "/signup" || request.path_info =="/error" || request.path_info =="/"
     current_user
     if logged_in? == false
       redirect to '/error'
@@ -19,7 +19,7 @@ class ApplicationController < Sinatra::Base
   end
 
   get "/" do
-    erb :welcome
+    redirect to '/login'
   end
 
   get "/error" do 
@@ -51,11 +51,12 @@ class ApplicationController < Sinatra::Base
       !!@user.items.find_by_id(params[:id].to_i)
     end
 
+    def current_item
+      @item = Item.find_by(id:params[:id].to_i)
+    end
     def current_list
       @list = List.find_by(id:params[:id])
     end
-
-    
 
     def update_username
       if User.find_by(username: params[:user][:username]) == nil
