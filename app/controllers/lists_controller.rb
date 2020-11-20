@@ -1,11 +1,15 @@
 class ListsController < ApplicationController
 
+    get '/lists' do
+        @lists = @user.lists.all
+        erb :'lists/index'
+    end
+
     get '/lists/new' do #new
         erb :'lists/new'
     end
 
     post '/lists/new' do #create
-        binding.pry
         List.create(name:params[:list][:name], user_id: @user.id)
         redirect to "/user/#{@user.id}"
     end

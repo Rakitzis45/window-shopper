@@ -1,5 +1,9 @@
 class ItemsController < ApplicationController
 
+    get '/items' do
+        @items = @user.items
+        erb :'items/index'
+    end
     
     get '/items/new' do #new
         @lists = @user.lists
