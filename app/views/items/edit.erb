@@ -1,4 +1,4 @@
-<h2><%=@item.name%></h1>
+<h2><%=@item.name%></h2>
 <form action='/items/<%=@item.id%>'method='POST'>
     <input type='hidden' name='_method' value="PATCH">
     <label>Item name:</label>
@@ -18,11 +18,11 @@
         <% end %>
     </select>
     <br/>
-    <input type='submit' value="Edit Item">
+    <input type='submit' value="Edit Item" class='button'>
 </form>
 <form action='/items/<%=@item.id%>' method="POST">
         <input type='hidden' name='_method' value="DELETE">
-        <input type='submit' value='Delete Item'>
+        <input type='submit' value='Delete Item' class='button'>
 </form>
 
 <a href='/lists/<%=@item.list_id%>'>Return to List</a>

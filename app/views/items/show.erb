@@ -1,10 +1,10 @@
 
     <h1><a href=<%=@item.item_url%> target="_blank"><%=@item.name%></a> </h1>
     
-    <label>Item price: $<%=@item.price%>
-    <br>
-    <form action='/items/<%=@item.id%>/edit'>
-        <input type='submit' value="Edit Item">
+    <label>Item price: $<%=@item.price%></label>
+    <br/>
+    <form action='/items/<%=@item.id%>/edit'method='GET'>
+        <input type='submit' value="Edit Item" class='button'>
     </form>
     <br/>
     <a href="/user/<%=session[:user_id]%>"> Return to your lists</a>
