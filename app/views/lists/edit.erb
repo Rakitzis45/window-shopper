@@ -5,10 +5,10 @@
     <input type='string' name=list[name] Value="<%=@list.name%>">
     <br/>
     <br/>
-    <input type='submit' value='Edit Name'>
+    <input type='submit' value='Edit Name' class='button'>
 </form>
 <br/>
 <form action='/lists/<%=@list.id%>' method='POST'>
     <input type='hidden' name='_method' value='DELETE'>
-    <input type='submit' value="Delete List">
+    <input type='submit' value="Delete List" class='button'>
 </form>
