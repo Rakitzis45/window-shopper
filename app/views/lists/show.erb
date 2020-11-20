@@ -2,7 +2,7 @@
 <h1><%=@list.name%></h1>
     <%@list.items.each do |item|%>
     <ol>
-        <li><a href="/items/<%=item.id%>"> <%=item.name%></a>: $<%=item.price%> </li>
+        <li><a href="/items/<%=item.id%>"> <%=item.name%></a>: $<%=sprintf"%.2f",item.price%> </li>
     </ol>
     <%end%>
     <br/>
