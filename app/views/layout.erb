@@ -4,6 +4,8 @@
 <!--[if IE 8]>    <html class="no-js ie8 oldie" lang="en"> <![endif]-->
 <!--[if gt IE 8]><!--> <html class="no-js" lang="en"> <!--<![endif]-->
   <head>
+
+  
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1" />
 
@@ -12,14 +14,27 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
     <link rel="stylesheet" href="/stylesheets/main.css" />
+    <%if logged_in? == true %>
+      <div class="toolbar">
+        <a href="/user/<%= @user.id %>">Home</a> 
+        <a href="/lists">Lists</a>
+        <a href="/items">Items</a>
+      </div>
+    <%end %>
   </head>
   <body>
     <div class="wrapper">
-
+      <a href="/login"><img src="/images/windowshopper.png" id="window_shopper_logo"></a>
+      
         <%= yield %>
 
       <footer class="branding">
-
+        <form action="/logout" method='GET'>
+          <%if logged_in? == true %>
+            <button class='button' id='button_footer'>Log Out</button>
+            <br/>
+          <%end %>
+        </form>
         <small>&copy; 2020 <strong>WindowShopper</strong></small>
       </footer>
     </div>
