@@ -1,0 +1,6 @@
+<h2>All Items</h2>
+<ol>
+    <%@items.each do |item| %>
+    <li><a href=<%= item.item_url %> target="_blank"><%= item.name %></a>: $<%=item.price %> </li><br/>
+    <%end %>
+</ol>
