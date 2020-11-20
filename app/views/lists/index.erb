@@ -1,0 +1,13 @@
+<h2>All Lists</h2>
+<ol>
+    <%@lists.each do |list| %>
+    <%total=0%>
+    <%list.items.each do |item| %>
+    <%total += item.price%>
+    <%end %>
+    <li><a href="/lists/<%=list.id%>"><%= list.name %></a>: Total $<%= sprintf "%.2f", total  %>
+    
+    </li>
+    <br/>
+    <%end %>
+</ol>
