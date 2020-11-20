@@ -10,12 +10,12 @@
     <input type ='password' name=user[password]>
     <br/>
     <br/>
-    <input type='submit' value='Update Login'>
+    <input type='submit' value='Update Login' class='button'>
 </form>
 <br/>
 <form action='/user/<%=@user.id%>/delete' method='POST'>
     <input type='hidden' name='_method' value="DELETE">
-    <input type='submit' value='Delete Account'>
+    <input type='submit' value='Delete Account' class='button'>
 </form>
-<br/>
-<a href='/user/<%=@user.id%>'> Return to Profile </a>
+
+
