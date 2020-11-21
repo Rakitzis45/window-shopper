@@ -53,7 +53,6 @@ class ItemsController < ApplicationController
     end
 
     delete '/items/:id' do #delete
-        binding.pry
         if your_item? == false 
             erb :'sessions/error'
         else
